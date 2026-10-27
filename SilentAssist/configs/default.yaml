@@ -1,0 +1,41 @@
+# SilentAssist default configuration
+
+model:
+  input_dim:   171      # 57 landmarks x 3 (x, y, z)
+  d_model:     256
+  nhead:       8
+  num_layers:  6
+  dim_ff:      1024
+  dropout:     0.1
+  vocab_size:  29       # 26 letters + blank + space + apostrophe
+
+landmark:
+  fps_target:  30
+  n_landmarks: 57
+  nose_idx:    1
+  left_eye:    33
+  right_eye:   263
+
+ctc:
+  beam_width:  10
+  n_best:      20
+
+reranker:
+  lambda1:     0.6     # ViT acoustic weight
+  lambda2:     0.4     # LLM language weight
+  use_phi3:    false   # set true when GPU + model available
+
+tts:
+  model:       en_US-lessac-medium
+  target_ms:   150
+
+training:
+  epochs:      50
+  batch_size:  8
+  lr:          1.0e-4
+  eval_every:  5
+
+paths:
+  data_dir:       ./data
+  checkpoint_dir: ./checkpoints
+  lora_dir:       ./lora_clinical
